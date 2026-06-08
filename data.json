@@ -1,0 +1,164 @@
+{
+  "admin_password": "vignesh@2026",
+  "profile": {
+    "name": "Pon Vigneshwaran",
+    "tagline": "Aspiring Data & Cloud Engineer",
+    "about": "A passionate tech enthusiast from Chennai, building expertise in cloud infrastructure and data engineering one project at a time. Optimistic by nature, relentless in pursuit of growth.",
+    "email": "ponvigneshw@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ponvigneshwaran-m-13222b326/",
+    "github": "https://github.com/Vignesh16714",
+    "location": "Chennai, Tamil Nadu, India",
+    "open_to": "Internships & Full-time Opportunities"
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Engineering — Computer Science",
+      "college": "Sathyabama Institute of Science and Technology",
+      "location": "Chennai, Tamil Nadu, India",
+      "year": "2024 – 2028",
+      "status": "Pre-Final Year (3rd Year)"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Programming",
+      "icon": "🐍",
+      "color": "blue",
+      "items": [
+        "Python",
+        "C",
+        "Java",
+        "PowerShell"
+      ]
+    },
+    {
+      "category": "Data & ML",
+      "icon": "🤖",
+      "color": "purple",
+      "items": [
+        "Data Preprocessing",
+        "Model Evaluation",
+        "Machine Learning",
+        "XGBoost",
+        "PySpark"
+      ]
+    },
+    {
+      "category": "Cloud",
+      "icon": "☁️",
+      "color": "cyan",
+      "items": [
+        "AWS",
+        "IAM",
+        "S3",
+        "EC2",
+        "Lambda",
+        "RDS"
+      ]
+    },
+    {
+      "category": "Tools",
+      "icon": "🛠️",
+      "color": "green",
+      "items": [
+        "Git & GitHub",
+        "VS Code",
+        "Power BI",
+        "AWS CLI"
+      ]
+    },
+    {
+      "category": "Currently Learning",
+      "icon": "📚",
+      "color": "pink",
+      "items": [
+        "SQL",
+        "Apache Airflow",
+        "Docker",
+        "Terraform",
+        "Data Pipelines"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "icon": "⚙️",
+      "title": "Big Data Analysis on Predictive Maintenance",
+      "desc": "Analyzed industrial sensor data to predict equipment failure using big data techniques and machine learning models.",
+      "highlight": "🏆 XGBoost ROC-AUC: 99.66%",
+      "stack": [
+        "Python",
+        "PySpark",
+        "XGBoost",
+        "Power BI"
+      ],
+      "github": "https://github.com/Vignesh16714/Big-Data-Analysis-on-Predictive-Maintenance",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "icon": "🐍",
+      "title": "Python Mini Projects",
+      "desc": "CLI Contact Book and Personal Expense Tracker with CSV data persistence and analytics.",
+      "highlight": "",
+      "stack": [
+        "Python",
+        "File I/O",
+        "CSV",
+        "OOP"
+      ],
+      "github": "https://github.com/Vignesh16714/python-mini-projects",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "icon": "🏦",
+      "title": "Bank Account System",
+      "desc": "Full OOP-based banking system with Savings and Current accounts, transaction history and interest calculation.",
+      "highlight": "",
+      "stack": [
+        "Python",
+        "OOP",
+        "Inheritance",
+        "JSON"
+      ],
+      "github": "https://github.com/Vignesh16714/bank-account-system",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "icon": "☁️",
+      "title": "Automated Data Pipeline on AWS",
+      "desc": "End-to-end data pipeline: CSV ingestion to S3, Lambda processing, RDS storage and automated reporting.",
+      "highlight": "",
+      "stack": [
+        "AWS S3",
+        "Lambda",
+        "RDS",
+        "Python",
+        "boto3"
+      ],
+      "github": "",
+      "status": "coming_soon"
+    }
+  ],
+  "stats": [
+    {
+      "number": "99.66%",
+      "label": "Best Model Accuracy"
+    },
+    {
+      "number": "5+",
+      "label": "Projects Planned"
+    },
+    {
+      "number": "3",
+      "label": "Tech Domains"
+    },
+    {
+      "number": "100%",
+      "label": "Commitment"
+    }
+  ]
+}

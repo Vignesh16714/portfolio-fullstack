@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio Admin</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#050510;--card:#0d0d1f;--card2:#111128;--neon:#00f5ff;--neon2:#bf00ff;--neon3:#00ff88;--red:#ff4444;--text:#e8e8ff;--muted:#6666aa;--border:#1a1a3a;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:3rem;width:100%;max-width:400px;text-align:center;}
+.login-logo{font-family:'Fira Code',monospace;color:var(--neon);font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;}
+.login-sub{color:var(--muted);font-size:0.85rem;margin-bottom:2rem;}
+.form-group{margin-bottom:1rem;text-align:left;}
+.form-label{display:block;font-size:0.75rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;font-family:'Fira Code',monospace;}
+.form-input{width:100%;padding:0.9rem 1.2rem;background:var(--card2);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:all 0.3s;}
+.form-input:focus{border-color:var(--neon);box-shadow:0 0 15px rgba(0,245,255,0.1);}
+.btn{width:100%;padding:0.9rem;border-radius:4px;border:none;font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.3s;text-transform:uppercase;letter-spacing:1px;}
+.btn-primary{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#000;}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-danger{background:rgba(255,68,68,0.15);color:var(--red);border:1px solid var(--red);padding:0.5rem 1rem;width:auto;font-size:0.8rem;}
+.btn-danger:hover{background:rgba(255,68,68,0.25);}
+.btn-success{background:rgba(0,255,136,0.15);color:var(--neon3);border:1px solid var(--neon3);padding:0.5rem 1rem;width:auto;font-size:0.8rem;}
+.btn-success:hover{background:rgba(0,255,136,0.25);}
+.btn-save{background:linear-gradient(135deg,var(--neon),var(--neon2));color:#000;padding:0.6rem 1.5rem;width:auto;font-size:0.85rem;border-radius:4px;}
+.error-msg{color:var(--red);font-size:0.82rem;margin-top:0.8rem;font-family:'Fira Code',monospace;}
+
+/* DASHBOARD */
+#dashboard{display:none;}
+header{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.header-logo{font-family:'Fira Code',monospace;color:var(--neon);font-weight:700;}
+.header-actions{display:flex;gap:1rem;align-items:center;}
+.header-link{color:var(--neon);text-decoration:none;font-size:0.82rem;border:1px solid var(--neon);padding:0.4rem 0.9rem;border-radius:4px;transition:all 0.3s;}
+.header-link:hover{background:rgba(0,245,255,0.1);}
+.logout-btn{background:transparent;color:var(--red);border:1px solid var(--red);padding:0.4rem 0.9rem;border-radius:4px;cursor:pointer;font-size:0.82rem;font-family:'Inter',sans-serif;transition:all 0.3s;}
+.logout-btn:hover{background:rgba(255,68,68,0.1);}
+
+.main{padding:2rem;max-width:1000px;margin:0 auto;}
+.tabs{display:flex;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.tab{padding:0.6rem 1.2rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.85rem;transition:all 0.3s;}
+.tab.active{border-color:var(--neon);color:var(--neon);background:rgba(0,245,255,0.08);}
+.tab:hover{border-color:var(--neon);color:var(--neon);}
+
+.panel{display:none;}
+.panel.active{display:block;}
+
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.8rem;margin-bottom:1.5rem;}
+.section-card-title{font-family:'Fira Code',monospace;color:var(--neon);font-size:0.85rem;letter-spacing:2px;margin-bottom:1.5rem;display:flex;justify-content:space-between;align-items:center;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-group-inline{display:flex;flex-direction:column;gap:0.4rem;}
+.form-group-full{margin-bottom:1rem;}
+textarea.form-input{resize:vertical;min-height:80px;}
+
+/* PROJECTS */
+.project-item{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:1.2rem;margin-bottom:1rem;}
+.project-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.project-item-title{font-weight:600;font-size:0.9rem;}
+.project-item-actions{display:flex;gap:0.5rem;}
+.proj-form{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
+.proj-form-full{grid-column:1/-1;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;padding:1rem 1.5rem;border-radius:6px;font-size:0.85rem;font-weight:600;z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.3s;font-family:'Fira Code',monospace;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-success{background:rgba(0,255,136,0.15);color:var(--neon3);border:1px solid var(--neon3);}
+.toast-error{background:rgba(255,68,68,0.15);color:var(--red);border:1px solid var(--red);}
+
+.loading-overlay{position:fixed;inset:0;background:rgba(5,5,16,0.8);display:flex;align-items:center;justify-content:center;z-index:9998;font-family:'Fira Code',monospace;color:var(--neon);font-size:1.2rem;display:none;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">&lt;Admin /&gt;</div>
+    <div class="login-sub">Portfolio Admin Dashboard</div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="pwd-input" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')login()"/>
+    </div>
+    <button class="btn btn-primary" onclick="login()">Login</button>
+    <div class="error-msg" id="login-error"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div class="header-logo">&lt;PV Admin /&gt;</div>
+    <div class="header-actions">
+      <a href="/" target="_blank" class="header-link">👁 View Portfolio</a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('profile')">👤 Profile</button>
+      <button class="tab" onclick="switchTab('projects')">💼 Projects</button>
+      <button class="tab" onclick="switchTab('skills')">🛠 Skills</button>
+      <button class="tab" onclick="switchTab('education')">🎓 Education</button>
+      <button class="tab" onclick="switchTab('stats')">📊 Stats</button>
+    </div>
+
+    <!-- PROFILE PANEL -->
+    <div class="panel active" id="panel-profile">
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>&gt; Profile Info</span>
+          <button class="btn btn-save" onclick="saveProfile()">💾 Save</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline"><label class="form-label">Name</label><input class="form-input" id="p-name" type="text"/></div>
+          <div class="form-group-inline"><label class="form-label">Tagline</label><input class="form-input" id="p-tagline" type="text"/></div>
+        </div>
+        <div class="form-group-full"><label class="form-label">About</label><textarea class="form-input" id="p-about"></textarea></div>
+        <div class="form-row">
+          <div class="form-group-inline"><label class="form-label">Email</label><input class="form-input" id="p-email" type="email"/></div>
+          <div class="form-group-inline"><label class="form-label">Location</label><input class="form-input" id="p-location" type="text"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group-inline"><label class="form-label">LinkedIn URL</label><input class="form-input" id="p-linkedin" type="text"/></div>
+          <div class="form-group-inline"><label class="form-label">GitHub URL</label><input class="form-input" id="p-github" type="text"/></div>
+        </div>
+        <div class="form-group-full"><label class="form-label">Open To</label><input class="form-input" id="p-opento" type="text"/></div>
+      </div>
+    </div>
+
+    <!-- PROJECTS PANEL -->
+    <div class="panel" id="panel-projects">
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>&gt; Projects</span>
+          <button class="btn btn-success" onclick="addProject()">+ Add Project</button>
+        </div>
+        <div id="projects-list"></div>
+      </div>
+    </div>
+
+    <!-- SKILLS PANEL -->
+    <div class="panel" id="panel-skills">
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>&gt; Skills</span>
+          <button class="btn btn-save" onclick="saveSkills()">💾 Save All</button>
+        </div>
+        <div id="skills-list"></div>
+      </div>
+    </div>
+
+    <!-- EDUCATION PANEL -->
+    <div class="panel" id="panel-education">
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>&gt; Education</span>
+          <button class="btn btn-save" onclick="saveEducation()">💾 Save</button>
+        </div>
+        <div id="edu-list"></div>
+      </div>
+    </div>
+
+    <!-- STATS PANEL -->
+    <div class="panel" id="panel-stats">
+      <div class="section-card">
+        <div class="section-card-title">
+          <span>&gt; Stats</span>
+          <button class="btn btn-save" onclick="saveStats()">💾 Save</button>
+        </div>
+        <div id="stats-list"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="loading-overlay" id="loader">Saving...</div>
+
+<script>
+const API = 'http://localhost:5000';
+let pwd = '';
+let data = {};
+
+// ── AUTH ──────────────────────────────────────
+async function login(){
+  const p = document.getElementById('pwd-input').value;
+  const res = await fetch(`${API}/api/auth`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: p})
+  });
+  const d = await res.json();
+  if(d.success){
+    pwd = p;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadData();
+  } else {
+    document.getElementById('login-error').textContent = '❌ Wrong password!';
+  }
+}
+
+function logout(){
+  pwd = '';
+  data = {};
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('pwd-input').value = '';
+}
+
+// ── LOAD DATA ─────────────────────────────────
+async function loadData(){
+  const res = await fetch(`${API}/api/portfolio`);
+  data = await res.json();
+  fillProfile(data.profile);
+  fillProjects(data.projects);
+  fillSkills(data.skills);
+  fillEducation(data.education);
+  fillStats(data.stats);
+}
+
+// ── TABS ──────────────────────────────────────
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(`panel-${name}`).classList.add('active');
+}
+
+// ── TOAST ─────────────────────────────────────
+function toast(msg, type='success'){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast toast-${type} show`;
+  setTimeout(()=> el.classList.remove('show'), 3000);
+}
+
+function loader(show){ document.getElementById('loader').style.display = show?'flex':'none'; }
+
+// ── PROFILE ───────────────────────────────────
+function fillProfile(p){
+  document.getElementById('p-name').value = p.name||'';
+  document.getElementById('p-tagline').value = p.tagline||'';
+  document.getElementById('p-about').value = p.about||'';
+  document.getElementById('p-email').value = p.email||'';
+  document.getElementById('p-location').value = p.location||'';
+  document.getElementById('p-linkedin').value = p.linkedin||'';
+  document.getElementById('p-github').value = p.github||'';
+  document.getElementById('p-opento').value = p.open_to||'';
+}
+
+async function saveProfile(){
+  loader(true);
+  const res = await fetch(`${API}/api/update/profile`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      password: pwd,
+      profile: {
+        name: document.getElementById('p-name').value,
+        tagline: document.getElementById('p-tagline').value,
+        about: document.getElementById('p-about').value,
+        email: document.getElementById('p-email').value,
+        location: document.getElementById('p-location').value,
+        linkedin: document.getElementById('p-linkedin').value,
+        github: document.getElementById('p-github').value,
+        open_to: document.getElementById('p-opento').value,
+      }
+    })
+  });
+  loader(false);
+  const d = await res.json();
+  d.success ? toast('✅ Profile saved!') : toast('❌ Failed!','error');
+}
+
+// ── PROJECTS ──────────────────────────────────
+function fillProjects(projects){
+  document.getElementById('projects-list').innerHTML = projects.map(p=>`
+    <div class="project-item" id="proj-${p.id}">
+      <div class="project-item-header">
+        <div class="project-item-title">${p.icon} ${p.title}</div>
+        <div class="project-item-actions">
+          <button class="btn btn-success" onclick="saveProject(${p.id})">💾 Save</button>
+          <button class="btn btn-danger" onclick="deleteProject(${p.id})">🗑 Delete</button>
+        </div>
+      </div>
+      <div class="proj-form">
+        <div><label class="form-label">Icon</label><input class="form-input" id="proj-icon-${p.id}" value="${p.icon}"/></div>
+        <div><label class="form-label">Status</label>
+          <select class="form-input" id="proj-status-${p.id}">
+            <option value="completed" ${p.status==='completed'?'selected':''}>✅ Completed</option>
+            <option value="coming_soon" ${p.status==='coming_soon'?'selected':''}>🔜 Coming Soon</option>
+          </select>
+        </div>
+        <div class="proj-form-full"><label class="form-label">Title</label><input class="form-input" id="proj-title-${p.id}" value="${p.title}"/></div>
+        <div class="proj-form-full"><label class="form-label">Description</label><textarea class="form-input" id="proj-desc-${p.id}">${p.desc}</textarea></div>
+        <div class="proj-form-full"><label class="form-label">Highlight (e.g. ROC-AUC score)</label><input class="form-input" id="proj-highlight-${p.id}" value="${p.highlight||''}"/></div>
+        <div class="proj-form-full"><label class="form-label">Stack (comma separated)</label><input class="form-input" id="proj-stack-${p.id}" value="${p.stack.join(', ')}"/></div>
+        <div class="proj-form-full"><label class="form-label">GitHub URL</label><input class="form-input" id="proj-github-${p.id}" value="${p.github||''}"/></div>
+      </div>
+    </div>`).join('');
+}
+
+async function saveProject(id){
+  loader(true);
+  const res = await fetch(`${API}/api/update/projects/${id}`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      password: pwd,
+      project: {
+        icon: document.getElementById(`proj-icon-${id}`).value,
+        title: document.getElementById(`proj-title-${id}`).value,
+        desc: document.getElementById(`proj-desc-${id}`).value,
+        highlight: document.getElementById(`proj-highlight-${id}`).value,
+        stack: document.getElementById(`proj-stack-${id}`).value.split(',').map(s=>s.trim()),
+        github: document.getElementById(`proj-github-${id}`).value,
+        status: document.getElementById(`proj-status-${id}`).value,
+      }
+    })
+  });
+  loader(false);
+  const d = await res.json();
+  d.success ? toast('✅ Project saved!') : toast('❌ Failed!','error');
+}
+
+async function deleteProject(id){
+  if(!confirm('Delete this project?')) return;
+  loader(true);
+  const res = await fetch(`${API}/api/update/projects/${id}/delete`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: pwd})
+  });
+  loader(false);
+  const d = await res.json();
+  if(d.success){ toast('🗑 Project deleted!'); loadData(); }
+  else toast('❌ Failed!','error');
+}
+
+async function addProject(){
+  loader(true);
+  const res = await fetch(`${API}/api/update/projects/add`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      password: pwd,
+      project: {icon:'🚀', title:'New Project', desc:'Project description', highlight:'', stack:['Python'], github:'', status:'coming_soon'}
+    })
+  });
+  loader(false);
+  const d = await res.json();
+  if(d.success){ toast('✅ Project added!'); loadData(); }
+  else toast('❌ Failed!','error');
+}
+
+// ── SKILLS ────────────────────────────────────
+function fillSkills(skills){
+  document.getElementById('skills-list').innerHTML = skills.map((s,i)=>`
+    <div class="project-item">
+      <div class="form-row">
+        <div><label class="form-label">Category</label><input class="form-input" id="skill-cat-${i}" value="${s.category}"/></div>
+        <div><label class="form-label">Icon</label><input class="form-input" id="skill-icon-${i}" value="${s.icon}"/></div>
+      </div>
+      <div class="form-group-full"><label class="form-label">Items (comma separated)</label>
+        <input class="form-input" id="skill-items-${i}" value="${s.items.join(', ')}"/>
+      </div>
+    </div>`).join('');
+}
+
+async function saveSkills(){
+  loader(true);
+  const skills = data.skills.map((s,i)=>({
+    ...s,
+    category: document.getElementById(`skill-cat-${i}`).value,
+    icon: document.getElementById(`skill-icon-${i}`).value,
+    items: document.getElementById(`skill-items-${i}`).value.split(',').map(x=>x.trim()),
+  }));
+  const res = await fetch(`${API}/api/update/skills`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: pwd, skills})
+  });
+  loader(false);
+  const d = await res.json();
+  d.success ? toast('✅ Skills saved!') : toast('❌ Failed!','error');
+}
+
+// ── EDUCATION ─────────────────────────────────
+function fillEducation(edu){
+  document.getElementById('edu-list').innerHTML = edu.map((e,i)=>`
+    <div class="project-item">
+      <div class="form-row">
+        <div><label class="form-label">Degree</label><input class="form-input" id="edu-degree-${i}" value="${e.degree}"/></div>
+        <div><label class="form-label">Year</label><input class="form-input" id="edu-year-${i}" value="${e.year}"/></div>
+      </div>
+      <div class="form-row">
+        <div><label class="form-label">College</label><input class="form-input" id="edu-college-${i}" value="${e.college}"/></div>
+        <div><label class="form-label">Status</label><input class="form-input" id="edu-status-${i}" value="${e.status}"/></div>
+      </div>
+      <div><label class="form-label">Location</label><input class="form-input" id="edu-loc-${i}" value="${e.location}"/></div>
+    </div>`).join('');
+}
+
+async function saveEducation(){
+  loader(true);
+  const education = data.education.map((e,i)=>({
+    ...e,
+    degree: document.getElementById(`edu-degree-${i}`).value,
+    year: document.getElementById(`edu-year-${i}`).value,
+    college: document.getElementById(`edu-college-${i}`).value,
+    status: document.getElementById(`edu-status-${i}`).value,
+    location: document.getElementById(`edu-loc-${i}`).value,
+  }));
+  const res = await fetch(`${API}/api/update/education`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: pwd, education})
+  });
+  loader(false);
+  const d = await res.json();
+  d.success ? toast('✅ Education saved!') : toast('❌ Failed!','error');
+}
+
+// ── STATS ─────────────────────────────────────
+function fillStats(stats){
+  document.getElementById('stats-list').innerHTML = stats.map((s,i)=>`
+    <div class="project-item">
+      <div class="form-row">
+        <div><label class="form-label">Number/Value</label><input class="form-input" id="stat-num-${i}" value="${s.number}"/></div>
+        <div><label class="form-label">Label</label><input class="form-input" id="stat-label-${i}" value="${s.label}"/></div>
+      </div>
+    </div>`).join('');
+}
+
+async function saveStats(){
+  loader(true);
+  const stats = data.stats.map((s,i)=>({
+    number: document.getElementById(`stat-num-${i}`).value,
+    label: document.getElementById(`stat-label-${i}`).value,
+  }));
+  const res = await fetch(`${API}/api/update/stats`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({password: pwd, stats})
+  });
+  loader(false);
+  const d = await res.json();
+  d.success ? toast('✅ Stats saved!') : toast('❌ Failed!','error');
+}
+</script>
+</body>
+</html>

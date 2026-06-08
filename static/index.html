@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pon Vigneshwaran | Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#050510;--card:#0d0d1f;--card2:#111128;--neon:#00f5ff;--neon2:#bf00ff;--neon3:#00ff88;--text:#e8e8ff;--muted:#6666aa;--border:#1a1a3a;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon),var(--neon2));border-radius:2px;}
+
+nav{position:fixed;top:0;width:100%;z-index:999;padding:1rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(5,5,16,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,245,255,0.1);}
+.logo{font-weight:900;font-size:1.3rem;color:var(--neon);font-family:'Fira Code',monospace;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.3s;letter-spacing:1px;text-transform:uppercase;}
+.nav-links a:hover{color:var(--neon);}
+.nav-btn{padding:0.5rem 1.5rem;border-radius:4px;background:transparent;color:var(--neon);border:1px solid var(--neon);cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'Inter',sans-serif;transition:all 0.3s;}
+.nav-btn:hover{background:rgba(0,245,255,0.1);}
+
+section{padding:6rem 3rem;}
+.container{max-width:1100px;margin:0 auto;}
+.sec-label{font-family:'Fira Code',monospace;color:var(--neon);font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;}
+.sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:1rem;background:linear-gradient(135deg,#fff,var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.sec-line{width:60px;height:2px;background:linear-gradient(90deg,var(--neon),var(--neon2));margin-bottom:3rem;box-shadow:0 0 10px var(--neon);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at 30% 50%,rgba(0,245,255,0.08),transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(191,0,255,0.08),transparent 60%),var(--bg);}
+.hero-greeting{font-family:'Fira Code',monospace;color:var(--neon);font-size:1rem;margin-bottom:1rem;letter-spacing:3px;}
+.hero-name{font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#fff,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.typing-wrap{font-size:1.2rem;color:var(--muted);margin-bottom:2rem;height:2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+#typing-text{color:var(--neon);font-weight:700;font-family:'Fira Code',monospace;}
+.cursor{animation:blink 0.8s infinite;color:var(--neon);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-desc{max-width:600px;margin:0 auto 2rem;color:var(--muted);line-height:1.8;font-size:0.95rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-neon{padding:0.9rem 2.5rem;border-radius:4px;border:1px solid var(--neon);background:transparent;color:var(--neon);font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.3s;text-transform:uppercase;letter-spacing:2px;}
+.btn-neon:hover{background:rgba(0,245,255,0.1);box-shadow:0 0 25px rgba(0,245,255,0.3);}
+.btn-neon2{padding:0.9rem 2.5rem;border-radius:4px;border:1px solid var(--neon2);background:transparent;color:var(--neon2);font-weight:700;font-size:0.9rem;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.3s;text-transform:uppercase;letter-spacing:2px;}
+.btn-neon2:hover{background:rgba(191,0,255,0.1);}
+
+/* STATS */
+#stats{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem;}
+.stats-row{display:flex;flex-wrap:wrap;justify-content:center;gap:3rem;text-align:center;}
+.stat-item .stat-num{font-size:2.5rem;font-weight:900;font-family:'Fira Code',monospace;color:var(--neon);text-shadow:0 0 20px var(--neon);}
+.stat-item .stat-label{color:var(--muted);font-size:0.78rem;margin-top:0.4rem;letter-spacing:1px;text-transform:uppercase;}
+
+/* ABOUT */
+#about{background:var(--bg);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1.2rem;font-size:0.95rem;}
+.about-text p span{color:var(--neon);font-weight:600;}
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(var(--neon),var(--neon2),transparent);}
+.tl-item{position:relative;margin-bottom:2rem;}
+.tl-dot{position:absolute;left:-2.4rem;top:0.3rem;width:10px;height:10px;border-radius:50%;background:var(--neon);box-shadow:0 0 15px var(--neon);}
+.tl-year{font-family:'Fira Code',monospace;color:var(--neon2);font-size:0.75rem;margin-bottom:0.3rem;}
+.tl-title{font-weight:700;font-size:0.95rem;margin-bottom:0.2rem;}
+.tl-desc{color:var(--muted);font-size:0.82rem;}
+
+/* SKILLS */
+#skills{background:var(--card);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;}
+.skill-group{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:1.8rem;transition:all 0.3s;}
+.skill-group:hover{border-color:var(--neon);box-shadow:0 0 30px rgba(0,245,255,0.1);}
+.skill-group-title{font-family:'Fira Code',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:1.5rem;letter-spacing:2px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.skill-tag{padding:0.35rem 0.8rem;border-radius:4px;font-size:0.78rem;font-weight:500;background:rgba(0,245,255,0.08);color:var(--neon);border:1px solid rgba(0,245,255,0.2);}
+
+/* PROJECTS */
+#projects{background:var(--bg);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon),var(--neon2));}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.4);border-color:rgba(0,245,255,0.3);}
+.proj-icon{font-size:2rem;margin-bottom:0.8rem;}
+.proj-badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:3px;font-size:0.7rem;font-weight:700;margin-bottom:0.5rem;}
+.badge-done{background:rgba(0,255,136,0.15);color:var(--neon3);border:1px solid rgba(0,255,136,0.3);}
+.badge-soon{background:rgba(0,245,255,0.15);color:var(--neon);border:1px solid rgba(0,245,255,0.3);}
+.proj-title{font-size:1rem;font-weight:700;margin-bottom:0.5rem;}
+.proj-desc{color:var(--muted);font-size:0.83rem;line-height:1.7;margin-bottom:1rem;}
+.proj-highlight{background:rgba(245,87,108,0.1);border:1px solid rgba(245,87,108,0.3);border-radius:6px;padding:0.5rem 0.8rem;font-size:0.78rem;color:#ff9999;margin-bottom:1rem;font-family:'Fira Code',monospace;}
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:1rem;}
+.proj-tag{padding:0.2rem 0.5rem;border-radius:3px;font-size:0.7rem;background:rgba(0,245,255,0.08);color:var(--neon);border:1px solid rgba(0,245,255,0.15);font-family:'Fira Code',monospace;}
+.proj-link{display:inline-block;padding:0.5rem 1rem;border-radius:4px;background:transparent;color:var(--neon);border:1px solid var(--neon);font-size:0.78rem;text-decoration:none;font-weight:600;transition:all 0.3s;}
+.proj-link:hover{background:rgba(0,245,255,0.1);}
+
+/* EDUCATION */
+#education{background:var(--card);}
+.edu-list{display:flex;flex-direction:column;gap:1.5rem;max-width:700px;}
+.edu-card{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:1.8rem;transition:all 0.3s;}
+.edu-card:hover{border-color:var(--neon2);box-shadow:0 0 20px rgba(191,0,255,0.1);}
+.edu-year{font-family:'Fira Code',monospace;color:var(--neon2);font-size:0.75rem;margin-bottom:0.3rem;}
+.edu-degree{font-weight:700;font-size:1rem;margin-bottom:0.3rem;}
+.edu-college{color:var(--neon);font-size:0.85rem;margin-bottom:0.3rem;}
+.edu-detail{color:var(--muted);font-size:0.82rem;}
+
+/* CONTACT */
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+.contact-links{display:flex;flex-direction:column;gap:1rem;}
+.contact-link{display:flex;align-items:center;gap:1.2rem;padding:1.2rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:all 0.3s;}
+.contact-link:hover{border-color:var(--neon);transform:translateX(6px);}
+.contact-link-icon{font-size:1.5rem;}
+.contact-label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.contact-val{font-weight:600;font-size:0.9rem;color:var(--neon);}
+.contact-cta{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2.5rem;text-align:center;}
+.contact-cta h3{font-size:1.5rem;font-weight:800;margin-bottom:0.8rem;}
+.contact-cta p{color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;}
+
+footer{background:var(--card);border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-family:'Fira Code',monospace;color:var(--neon);font-weight:700;}
+.footer-text{color:var(--muted);font-size:0.8rem;}
+
+.loading{text-align:center;padding:4rem;color:var(--muted);font-family:'Fira Code',monospace;}
+
+@media(max-width:768px){
+  nav{padding:1rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.5rem;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">&lt;PV /&gt;</div>
+  <ul class="nav-links">
+    <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</a></li>
+    <li><a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</a></li>
+    <li><a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Projects</a></li>
+    <li><a onclick="document.getElementById('education').scrollIntoView({behavior:'smooth'})">Education</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="window.location.href='mailto:ponvigneshw@gmail.com'">Hire Me</button>
+</nav>
+
+<section id="hero">
+  <div>
+    <div class="hero-greeting">&gt; Hello, World! I'm</div>
+    <h1 class="hero-name" id="hero-name">Loading...</h1>
+    <div class="typing-wrap">
+      <span style="color:var(--muted)">I build as a</span>
+      <span id="typing-text"></span><span class="cursor">|</span>
+    </div>
+    <p class="hero-desc" id="hero-desc">Loading...</p>
+    <div class="hero-btns">
+      <button class="btn-neon" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Explore Projects</button>
+      <button class="btn-neon2" id="hire-btn" onclick="window.location.href='mailto:ponvigneshw@gmail.com'">Get In Touch</button>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="container">
+    <div class="stats-row" id="stats-row">
+      <div class="loading">Loading stats...</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="sec-label">// about_me.py</div>
+        <h2 class="sec-title">Who Am I?</h2>
+        <div class="sec-line"></div>
+        <div id="about-text">Loading...</div>
+      </div>
+      <div class="timeline" id="timeline">Loading...</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="sec-label">// skills.json</div>
+    <h2 class="sec-title">Tech Stack</h2>
+    <div class="sec-line"></div>
+    <div class="skills-grid" id="skills-grid">
+      <div class="loading">Loading skills...</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="sec-label">// projects.list</div>
+    <h2 class="sec-title">Featured Work</h2>
+    <div class="sec-line"></div>
+    <div class="projects-grid" id="projects-grid">
+      <div class="loading">Loading projects...</div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="container">
+    <div class="sec-label">// education.log</div>
+    <h2 class="sec-title">Education</h2>
+    <div class="sec-line"></div>
+    <div class="edu-list" id="edu-list">
+      <div class="loading">Loading education...</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="sec-label">// contact.init()</div>
+    <h2 class="sec-title">Let's Connect</h2>
+    <div class="sec-line"></div>
+    <div class="contact-grid">
+      <div class="contact-links" id="contact-links">Loading...</div>
+      <div class="contact-cta">
+        <h3>Open to <span style="background:linear-gradient(135deg,var(--neon),var(--neon2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Opportunities</span></h3>
+        <p>I'm actively looking for internships and entry-level roles in Cloud Engineering and Data Engineering.</p>
+        <button class="btn-neon" id="contact-btn">Say Hello 👋</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">&lt;PV /&gt;</div>
+  <div class="footer-text" id="footer-text">© 2026 Portfolio</div>
+</footer>
+
+<script>
+const API = 'http://localhost:5000';
+
+// ── FETCH & RENDER ────────────────────────────
+async function loadPortfolio(){
+  try {
+    const res = await fetch(`${API}/api/portfolio`);
+    const d = await res.json();
+    renderProfile(d.profile);
+    renderStats(d.stats);
+    renderSkills(d.skills);
+    renderProjects(d.projects);
+    renderEducation(d.education);
+    renderContact(d.profile);
+  } catch(e){
+    console.error('API Error:', e);
+    document.getElementById('hero-name').textContent = 'Pon Vigneshwaran';
+    document.getElementById('hero-desc').textContent = 'Aspiring Data & Cloud Engineer from Chennai.';
+  }
+}
+
+function renderProfile(p){
+  document.getElementById('hero-name').textContent = p.name;
+  document.getElementById('hero-desc').textContent = p.about;
+  document.getElementById('hire-btn').onclick = ()=> window.location.href=`mailto:${p.email}`;
+  document.getElementById('footer-text').textContent = `© 2026 ${p.name} • ${p.location}`;
+  document.title = `${p.name} | Portfolio`;
+  document.getElementById('about-text').innerHTML = `
+    <p>I'm <span>${p.name}</span>, based in <span>${p.location}</span>.</p>
+    <p>${p.about}</p>
+    <p>Currently <span>${p.open_to}</span>.</p>`;
+  document.getElementById('timeline').innerHTML = `
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024 — Present</div><div class="tl-title">B.E. Computer Science — Sathyabama</div><div class="tl-desc">Pre-final year. Cloud, data engineering & ML focus.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">June 2026</div><div class="tl-title">Big Data Predictive Maintenance</div><div class="tl-desc">XGBoost ROC-AUC: 99.66%.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">June 2026</div><div class="tl-title">Started AWS Cloud Journey</div><div class="tl-desc">IAM, S3, EC2, Lambda, RDS.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2026 Target</div><div class="tl-title">AWS Solutions Architect Cert</div><div class="tl-desc">Preparing for SAA-C03.</div></div>`;
+}
+
+function renderStats(stats){
+  const el = document.getElementById('stats-row');
+  // Add live github repos
+  el.innerHTML = stats.map(s=>`
+    <div class="stat-item">
+      <div class="stat-num">${s.number}</div>
+      <div class="stat-label">${s.label}</div>
+    </div>`).join('') + `
+    <div class="stat-item">
+      <div class="stat-num" id="repo-count">...</div>
+      <div class="stat-label">GitHub Repos</div>
+    </div>`;
+  // Live GitHub count
+  fetch('https://api.github.com/users/Vignesh16714')
+    .then(r=>r.json()).then(d=>{
+      document.getElementById('repo-count').textContent = d.public_repos || '5';
+    }).catch(()=>{ document.getElementById('repo-count').textContent='5'; });
+}
+
+function renderSkills(skills){
+  document.getElementById('skills-grid').innerHTML = skills.map(s=>`
+    <div class="skill-group">
+      <div class="skill-group-title">${s.icon} ${s.category}</div>
+      <div class="skill-tags">${s.items.map(i=>`<span class="skill-tag">${i}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+function renderProjects(projects){
+  document.getElementById('projects-grid').innerHTML = projects.map(p=>`
+    <div class="proj-card">
+      <div class="proj-icon">${p.icon}</div>
+      <span class="proj-badge ${p.status==='completed'?'badge-done':'badge-soon'}">${p.status==='completed'?'✅ Completed':'🔜 Coming Soon'}</span>
+      <div class="proj-title">${p.title}</div>
+      <div class="proj-desc">${p.desc}</div>
+      ${p.highlight?`<div class="proj-highlight">${p.highlight}</div>`:''}
+      <div class="proj-stack">${p.stack.map(t=>`<span class="proj-tag">${t}</span>`).join('')}</div>
+      ${p.github?`<a href="${p.github}" target="_blank" class="proj-link">⭐ View on GitHub</a>`:'<span style="color:var(--muted);font-size:0.78rem;">In Progress...</span>'}
+    </div>`).join('');
+}
+
+function renderEducation(edu){
+  document.getElementById('edu-list').innerHTML = edu.map(e=>`
+    <div class="edu-card">
+      <div class="edu-year">${e.year}</div>
+      <div class="edu-degree">${e.degree}</div>
+      <div class="edu-college">${e.college}</div>
+      <div class="edu-detail">${e.location} • ${e.status}</div>
+    </div>`).join('');
+}
+
+function renderContact(p){
+  document.getElementById('contact-links').innerHTML = `
+    <a href="mailto:${p.email}" class="contact-link"><div class="contact-link-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-val">${p.email}</div></div></a>
+    <a href="${p.linkedin}" target="_blank" class="contact-link"><div class="contact-link-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-val">Ponvigneshwaran M</div></div></a>
+    <a href="${p.github}" target="_blank" class="contact-link"><div class="contact-link-icon">🐙</div><div><div class="contact-label">GitHub</div><div class="contact-val">Vignesh16714</div></div></a>`;
+  document.getElementById('contact-btn').onclick = ()=> window.location.href=`mailto:${p.email}`;
+}
+
+// ── TYPING EFFECT ─────────────────────────────
+const roles=['Cloud Engineer','Data Engineer','DevOps Enthusiast','Data Analyst','ML Engineer'];
+let ri=0,ci=0,del=false;
+const typEl=document.getElementById('typing-text');
+function type(){
+  const w=roles[ri];
+  typEl.textContent=del?w.slice(0,ci-1):w.slice(0,ci+1);
+  del?ci--:ci++;
+  if(!del&&ci===w.length){del=true;setTimeout(type,1800);return;}
+  if(del&&ci===0){del=false;ri=(ri+1)%roles.length;}
+  setTimeout(type,del?60:100);
+}
+
+// ── INIT ──────────────────────────────────────
+loadPortfolio();
+type();
+</script>
+</body>
+</html>
